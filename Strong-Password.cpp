@@ -59,3 +59,13 @@ int minimumNumber(int n, string password) {
     
     return std::max(6 - n, 4 - __builtin_popcount(flags));
 }
+
+
+int countBits(int n) {
+    int count = 0;
+    while (n) {
+        count += n & 1;
+        n >>= 1;
+    }
+    return count;
+}
