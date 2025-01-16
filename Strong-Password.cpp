@@ -43,3 +43,19 @@ int minimumNumber(int n, string password) {
     
     return std::max(6 - n, 4 - (a + b + c + d));
 }
+
+
+int minimumNumber(int n, string password) {
+    uint8_t flags = 0;
+    
+    for (char c : password) {
+        if (isdigit(c)) flags |= 1;
+        else if (isupper(c)) flags |= 2;
+        else if (islower(c)) flags |= 4;
+        else flags |= 8;
+        
+        if (flags == 15) break; // 모든 비트가 설정되면 종료
+    }
+    
+    return std::max(6 - n, 4 - __builtin_popcount(flags));
+}
