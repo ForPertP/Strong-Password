@@ -61,7 +61,7 @@ int minimumNumber(int n, string password) {
 }
 
 
-int countBits(int n) {
+int countBits(uint8_t n) {
     int count = 0;
     while (n) {
         count += n & 1;
@@ -69,3 +69,19 @@ int countBits(int n) {
     }
     return count;
 }
+
+int minimumNumber(int n, string password) {
+    uint8_t flags = 0;
+    
+    for (char c : password) {
+        if (isdigit(c)) flags |= 1;
+        else if (isupper(c)) flags |= 2;
+        else if (islower(c)) flags |= 4;
+        else flags |= 8;
+        
+        if (flags == 15) break;  // 모든 조건 만족시 중단
+    }
+    
+    return std::max(6 - n, 4 - countBits(flags));
+}
+
