@@ -16,7 +16,6 @@ string rtrim(const string &);
 
 int minimumNumber(int n, string password)
 {
-    int count = 0;
     int a = 0, b = 0, c = 0, d = 0;
     
     for (const auto & check : password )
