@@ -14,7 +14,6 @@ string rtrim(const string &);
  *  2. STRING password
  */
 
-
 #ifdef _MSC_VER
     #include <intrin.h>
     int popcount(uint8_t flags) {
