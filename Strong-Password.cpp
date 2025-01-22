@@ -15,6 +15,42 @@ string rtrim(const string &);
  */
 
 
+#ifdef _MSC_VER
+    #include <intrin.h>
+    int popcount(uint8_t flags) {
+        return __popcnt(flags);
+    }
+#elif defined(__GNUC__)
+    int popcount(uint8_t flags) {
+        return __builtin_popcount(flags);
+    }
+#else
+    int popcount(uint8_t flags) {
+        int count = 0;
+        while (flags) {
+            count += flags & 1;
+            flags >>= 1;
+        }
+        return count;
+    }
+#endif
+
+int minimumNumber(int n, std::string password) {
+    uint8_t flags = 0;
+
+    for (char c : password) {
+        if (isdigit(c)) flags |= 1;
+        else if (isupper(c)) flags |= 2;
+        else if (islower(c)) flags |= 4;
+        else flags |= 8;
+
+        if (flags == 15) break;
+    }
+
+    return std::max(6 - n, 4 - popcount(flags));
+}
+
+
 int countBits(uint8_t n) {
     int count = 0;
     while (n) {
@@ -78,26 +114,17 @@ int minimumNumber3(int n, string password) {
     for (const auto & check : password )
     {
         if (isdigit(check))
-        {
             a = 1;
-        }
         else if (isupper(check))
-        {
             b = 1;
-        }
         else if (islower(check))
-        {
             c = 1;
-        }
         else
-        {
             d = 1;
-        }
     }
     
     return std::max(6 - n, 4 - a - b - c - d);
 }
-
 
 
 int main()
