@@ -24,12 +24,22 @@ class Result
      *  2. STRING password
      */
 
-    public static int minimumNumber(int n, string password)
+    public static int minimumNumber2(int n, string password)
     {
-    // Return the minimum number of characters to make the password strong
+        int a = 0, b = 0, c = 0, d = 0;
 
+        foreach (char check in password)
+        {
+            if (char.IsDigit(check)) a = 1;
+            else if (char.IsUpper(check)) b = 1;
+            else if (char.IsLower(check)) c = 1;
+            else d = 1;
+
+            if (a + b + c + d == 4) break;
+        }
+
+        return Math.Max(6 - n, 4 - (a + b + c + d));
     }
-
 }
 
 class Solution
