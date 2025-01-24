@@ -24,6 +24,36 @@ class Result
      *  2. STRING password
      */
 
+
+    private static int CountSetBits(int num)
+    {
+        int count = 0;
+        while (num > 0)
+        {
+            count += num & 1;
+            num >>= 1;
+        }
+        return count;
+    }
+
+    public static int minimumNumber(int n, string password)
+    {
+        int flags = 0;
+
+        foreach (char c in password)
+        {
+            if (char.IsDigit(c)) flags |= 1;
+            else if (char.IsUpper(c)) flags |= 2;
+            else if (char.IsLower(c)) flags |= 4;
+            else flags |= 8;
+
+            if (flags == 15) break;
+        }
+
+        return Math.Max(6 - n, 4 - CountSetBits(flags));
+    }
+    
+        
     public static int minimumNumber2(int n, string password)
     {
         int a = 0, b = 0, c = 0, d = 0;
@@ -41,6 +71,7 @@ class Result
         return Math.Max(6 - n, 4 - (a + b + c + d));
     }
 }
+
 
 class Solution
 {
