@@ -10,6 +10,22 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
+class Result {
+
+    /*
+     * Complete the 'minimumNumber' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. STRING password
+     */
+
+    
+    public static int minimumNumber2(int n, String password) {
+        return Math.max(6 - n, 4 - (a + b + c + d));
+    }
+}
 
 
 public class Solution {
