@@ -21,8 +21,46 @@ class Result {
      *  2. STRING password
      */
 
+    private static int countSetBits(int num) {
+        int count = 0;
+        while (num > 0) {
+            count += num & 1;
+            num >>= 1;
+        }
+        return count;
+    }
+
+    public static int minimumNumber(int n, String password) {
+        int flags = 0;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) flags |= 1;
+            else if (Character.isUpperCase(c)) flags |= 2;
+            else if (Character.isLowerCase(c)) flags |= 4;
+            else flags |= 8;
+
+            if (flags == 15) break;
+        }
+
+        int requiredCharacterTypes = 4 - countSetBits(flags);
+        int additionalCharactersNeeded = Math.max(0, 6 - n);
+
+        return Math.max(requiredCharacterTypes, additionalCharactersNeeded);
+    }
+
     
     public static int minimumNumber2(int n, String password) {
+        int a = 0, b = 0, c = 0, d = 0;
+
+        for (char check : password.toCharArray()) {
+            if (Character.isDigit(check)) a = 1;
+            else if (Character.isUpperCase(check)) b = 1;
+            else if (Character.isLowerCase(check)) c = 1;
+            else d = 1;
+
+            if (a + b + c + d == 4) break;
+        }
+
         return Math.max(6 - n, 4 - (a + b + c + d));
     }
 }
