@@ -42,10 +42,7 @@ class Result {
             if (flags == 15) break;
         }
 
-        int requiredCharacterTypes = 4 - countSetBits(flags);
-        int additionalCharactersNeeded = Math.max(0, 6 - n);
-
-        return Math.max(requiredCharacterTypes, additionalCharactersNeeded);
+        return Math.max(6 - n, 4 - countSetBits(flags));
     }
 
     
